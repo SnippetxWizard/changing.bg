@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="content">
+                <h2 id="color_code">#fff</h2>
+                <i id="icon" class="far fa-copy"></i>
+            </div>
+            <button id="btn">Change Background</button>
+        </div>
+    </div> 
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+    
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    transition: background .5s;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    border-radius: 15px;
+    background: #fff;
+    padding: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+}
+
+.container .content {
+    display: flex;
+    margin: 15px 0;
+}
+
+.content #color_code {
+    font-size: 1rem;
+    margin-right: 20px;
+}
+
+.content i {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#btn {
+    display: block;
+    background: #cb5eb1;
+    color: #fff;
+    width: 100%;
+    border: 0;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+</style>
+<script>
+    
+
+const getColor = () => {
+  const randomNumber = Math.floor(Math.random() * 16777215);
+  const randomCode = "#" + randomNumber.toString(16);
+  document.body.style.backgroundColor = randomCode;
+  document.getElementById("color_code").innerText = randomCode;
+
+  const icon = document.getElementById("icon");
+  if (icon.classList.contains("fas")) {
+    icon.classList.replace("fas", "far");
+  }
+};
+
+const copyColor = () => {
+  const colorCode = document.getElementById("color_code").innerText;
+  navigator.clipboard.writeText(colorCode).then(() => {
+    const icon = document.getElementById("icon");
+    if (icon.classList.contains("far")) {
+      icon.classList.replace("far", "fas");
+    }
+  });
+};
+
+document.getElementById("btn").addEventListener("click", getColor);
+document.getElementById("icon").addEventListener("click", copyColor);
+
+getColor();
+
+
+</script>
